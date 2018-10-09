@@ -32,7 +32,7 @@ const ordersRoutes = (router, rootPath) => {
         .get((req, res) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     })
-        .put(functions_1.default.requireRoles(['user, admin']), (req, res) => {
+        .put(functions_1.default.requireRoles(['user', 'admin']), (req, res) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     })
         .delete(functions_1.default.requireRoles(['user']), (req, res) => {

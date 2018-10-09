@@ -45,7 +45,7 @@ const ordersRoutes = (router: Router, rootPath: string) => {
             res.status(501).json({error: true, message: `Not Implemented`})
         })
 
-        .put(fn.requireRoles(['user, admin']), (req, res) => {
+        .put(fn.requireRoles(['user', 'admin']), (req, res) => {
             res.status(501).json({error: true, message: `Not Implemented`})
         })
 
