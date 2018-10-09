@@ -12,6 +12,10 @@ class Orders {
         return db(ordersTable).insert({ ordername })
     }
 
+    static deleteOrder(id: number) {
+        return db(ordersTable).delete().where({ id })
+    }
+
 }
 
 export default Orders

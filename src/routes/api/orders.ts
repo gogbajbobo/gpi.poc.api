@@ -50,7 +50,11 @@ const ordersRoutes = (router: Router, rootPath: string) => {
         })
 
         .delete(fn.requireRoles(['user']), (req, res) => {
-            res.status(501).json({error: true, message: `Not Implemented`})
+
+            Orders.deleteOrder(req.params.id)
+                .then(order => res.status(200).json({ error: false, order }))
+                .catch(err => fn.catchErr(err, res));
+
         })
 
 };
