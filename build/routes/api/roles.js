@@ -8,15 +8,13 @@ const roles_1 = __importDefault(require("../../internal/db/roles"));
 const rolesRoutes = (router, rootPath) => {
     const rolesPath = `${rootPath}/roles`;
     const rolesIdPath = `${rootPath}/roles/:id`;
-    router.route([rolesPath, rolesIdPath])
-        .all(functions_1.default.requireRoles(['admin']), (req, res, next) => next());
     router.route(rolesPath)
         .get((req, res) => {
         roles_1.default.getRoles()
             .then(roles => res.status(200).json({ error: false, roles }))
             .catch(err => functions_1.default.catchErr(err, res));
     })
-        .post((req, res) => {
+        .post(functions_1.default.requireRoles(['admin']), (req, res) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     });
     router.route(rolesIdPath)
@@ -28,10 +26,10 @@ const rolesRoutes = (router, rootPath) => {
         .get((req, res) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     })
-        .put((req, res) => {
+        .put(functions_1.default.requireRoles(['admin']), (req, res) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     })
-        .delete((req, res) => {
+        .delete(functions_1.default.requireRoles(['admin']), (req, res) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     });
 };

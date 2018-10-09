@@ -9,11 +9,11 @@ class Orders {
     static getOrders() {
         return _1.default(ordersTable).select();
     }
-    static addOrder(ordername) {
-        return _1.default(ordersTable).insert({ ordername });
+    static addOrder(user_id, ordername) {
+        return _1.default(ordersTable).insert({ user_id, ordername });
     }
-    static updateOrder(id, ordername, approved) {
-        return _1.default(ordersTable).update({ ordername, approved }).where({ id });
+    static updateOrder(id, ordername, approved, user_id) {
+        return _1.default(ordersTable).update({ ordername, approved }).where({ id, user_id });
     }
     static deleteOrder(id) {
         return _1.default(ordersTable).delete().where({ id });

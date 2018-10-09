@@ -19,7 +19,7 @@ const ordersRoutes = (router, rootPath) => {
         if (!ordername) {
             res.status(400).json({ error: true, message: `Bad Request` });
         }
-        orders_1.default.addOrder(ordername)
+        orders_1.default.addOrder(req.user.id, ordername)
             .then(order => res.status(200).json({ error: false, order }))
             .catch(err => functions_1.default.catchErr(err, res));
     });
@@ -33,7 +33,7 @@ const ordersRoutes = (router, rootPath) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     })
         .put(functions_1.default.requireRoles(['user', 'admin']), (req, res) => {
-        orders_1.default.updateOrder(req.params.id, req.body.ordername, req.body.approved)
+        orders_1.default.updateOrder(req.params.id, req.body.ordername, req.body.approved, req.user.id)
             .then(order => res.status(200).json({ error: false, order }))
             .catch(err => functions_1.default.catchErr(err, res));
     })
