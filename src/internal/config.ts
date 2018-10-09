@@ -1,10 +1,10 @@
 import config from 'nconf'
 
 config
-    .file('../hbud.config.json');
+    .file('../gpi.poc.config.json');
 
 config.get('env') && (process.env.NODE_ENV = config.get('env'));
 
-process.env.appname = 'server';
+process.env.appname = 'api';
 
 export default config
