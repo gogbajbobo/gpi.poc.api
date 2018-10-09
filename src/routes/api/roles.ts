@@ -9,9 +9,6 @@ const rolesRoutes = (router: Router, rootPath: string) => {
     const rolesPath = `${ rootPath }/roles`;
     const rolesIdPath = `${ rootPath }/roles/:id`;
 
-    router.route([rolesPath, rolesIdPath])
-        .all(fn.requireRoles(['admin']), (req, res, next) => next());
-
     router.route(rolesPath)
 
         .get((req, res) => {
@@ -22,7 +19,7 @@ const rolesRoutes = (router: Router, rootPath: string) => {
 
         })
 
-        .post((req, res) => {
+        .post(fn.requireRoles(['admin']), (req, res) => {
             res.status(501).json({error: true, message: `Not Implemented`})
         });
 
@@ -41,11 +38,11 @@ const rolesRoutes = (router: Router, rootPath: string) => {
             res.status(501).json({error: true, message: `Not Implemented`})
         })
 
-        .put((req, res) => {
+        .put(fn.requireRoles(['admin']), (req, res) => {
             res.status(501).json({error: true, message: `Not Implemented`})
         })
 
-        .delete((req, res) => {
+        .delete(fn.requireRoles(['admin']), (req, res) => {
             res.status(501).json({error: true, message: `Not Implemented`})
         })
 
