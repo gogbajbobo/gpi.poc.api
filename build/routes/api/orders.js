@@ -9,8 +9,8 @@ const ordersRoutes = (router, rootPath) => {
     const ordersPath = `${rootPath}/orders`;
     const ordersIdPath = `${ordersPath}/:id`;
     router.route(ordersPath)
-        .get((req, res) => {
-        orders_1.default.getOrders()
+        .get(functions_1.default.requireRoles(['user', 'admin']), (req, res) => {
+        orders_1.default.getOrders(req.user.roles, req.user.id)
             .then(orders => res.status(200).json({ error: false, orders }))
             .catch(err => functions_1.default.catchErr(err, res));
     })
@@ -29,11 +29,11 @@ const ordersRoutes = (router, rootPath) => {
             ? next()
             : res.status(400).json({ error: true, message: `have no id` });
     })
-        .get((req, res) => {
+        .get(functions_1.default.requireRoles(['user', 'admin']), (req, res) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     })
         .put(functions_1.default.requireRoles(['user', 'admin']), (req, res) => {
-        orders_1.default.updateOrder(req.params.id, req.body.ordername, req.body.approved, req.user.id)
+        orders_1.default.updateOrder(req.params.id, req.body.ordername, req.body.approved, req.user.id, req.user.roles)
             .then(order => res.status(200).json({ error: false, order }))
             .catch(err => functions_1.default.catchErr(err, res));
     })
