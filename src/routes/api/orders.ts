@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import fn from '../functions'
 import Orders from '../../internal/db/orders'
-import Roles from "../../internal/db/roles";
 
 const ordersRoutes = (router: Router, rootPath: string) => {
 
@@ -19,7 +18,17 @@ const ordersRoutes = (router: Router, rootPath: string) => {
         })
 
         .post(fn.requireRoles(['user']), (req, res) => {
-            res.status(501).json({error: true, message: `Not Implemented`})
+
+            const ordername: string = req.body.ordername;
+
+            if (!ordername) {
+                res.status(400).json({error: true, message: `Bad Request`})
+            }
+
+            Orders.addOrder(ordername)
+                .then(order => res.status(200).json({ error: false, order }))
+                .catch(err => fn.catchErr(err, res))
+
         });
 
     router.route(ordersIdPath)

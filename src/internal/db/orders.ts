@@ -6,6 +6,10 @@ class Orders {
         return db('orders').select()
     }
 
+    static addOrder(ordername: string) {
+        return db('orders').insert({ ordername })
+    }
+
 }
 
 export default Orders
