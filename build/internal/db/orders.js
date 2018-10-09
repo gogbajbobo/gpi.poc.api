@@ -12,6 +12,9 @@ class Orders {
     static addOrder(ordername) {
         return _1.default(ordersTable).insert({ ordername });
     }
+    static updateOrder(id, ordername, approved) {
+        return _1.default(ordersTable).update({ ordername, approved }).where({ id });
+    }
     static deleteOrder(id) {
         return _1.default(ordersTable).delete().where({ id });
     }

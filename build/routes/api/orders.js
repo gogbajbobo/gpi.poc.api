@@ -33,7 +33,9 @@ const ordersRoutes = (router, rootPath) => {
         res.status(501).json({ error: true, message: `Not Implemented` });
     })
         .put(functions_1.default.requireRoles(['user', 'admin']), (req, res) => {
-        res.status(501).json({ error: true, message: `Not Implemented` });
+        orders_1.default.updateOrder(req.params.id, req.body.ordername, req.body.approved)
+            .then(order => res.status(200).json({ error: false, order }))
+            .catch(err => functions_1.default.catchErr(err, res));
     })
         .delete(functions_1.default.requireRoles(['user']), (req, res) => {
         orders_1.default.deleteOrder(req.params.id)

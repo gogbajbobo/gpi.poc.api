@@ -12,6 +12,10 @@ class Orders {
         return db(ordersTable).insert({ ordername })
     }
 
+    static updateOrder(id: number, ordername: string, approved:boolean ) {
+        return db(ordersTable).update({ ordername, approved }).where({ id })
+    }
+
     static deleteOrder(id: number) {
         return db(ordersTable).delete().where({ id })
     }
