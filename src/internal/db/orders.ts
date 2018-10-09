@@ -4,8 +4,13 @@ const ordersTable = 'orders';
 
 class Orders {
 
-    static getOrders() {
-        return db(ordersTable).select()
+    static getOrders(userRoles: string[], user_id: number) {
+
+        if (userRoles.includes('admin'))
+            return db(ordersTable).select();
+
+        return db(ordersTable).select().where({ user_id })
+
     }
 
     static addOrder(user_id: number, ordername: string) {

@@ -9,9 +9,9 @@ const ordersRoutes = (router: Router, rootPath: string) => {
 
     router.route(ordersPath)
 
-        .get((req, res) => {
+        .get(fn.requireRoles(['user', 'admin']), (req, res) => {
 
-            Orders.getOrders()
+            Orders.getOrders(req.user.roles, req.user.id)
                 .then(orders => res.status(200).json({ error: false, orders }))
                 .catch(err => fn.catchErr(err, res))
 
@@ -41,7 +41,7 @@ const ordersRoutes = (router: Router, rootPath: string) => {
 
         })
 
-        .get((req, res) => {
+        .get(fn.requireRoles(['user', 'admin']), (req, res) => {
             res.status(501).json({error: true, message: `Not Implemented`})
         })
 
