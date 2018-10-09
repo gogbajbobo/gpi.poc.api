@@ -47,7 +47,7 @@ const ordersRoutes = (router: Router, rootPath: string) => {
 
         .put(fn.requireRoles(['user', 'admin']), (req, res) => {
 
-            Orders.updateOrder(req.params.id, req.body.ordername, req.body.approved, req.user.id)
+            Orders.updateOrder(req.params.id, req.body.ordername, req.body.approved, req.user.id, req.user.roles)
                 .then(order => res.status(200).json({ error: false, order }))
                 .catch(err => fn.catchErr(err, res))
 

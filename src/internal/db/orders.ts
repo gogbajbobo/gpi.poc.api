@@ -17,8 +17,13 @@ class Orders {
         return db(ordersTable).insert({ user_id, ordername })
     }
 
-    static updateOrder(id: number, ordername: string, approved:boolean, user_id: number ) {
+    static updateOrder(id: number, ordername: string, approved:boolean, user_id: number,userRoles: string[]) {
+
+        if (userRoles.includes('admin'))
+            return db(ordersTable).update({ ordername, approved }).where({ id });
+
         return db(ordersTable).update({ ordername, approved }).where({ id, user_id })
+
     }
 
     static deleteOrder(id: number) {
