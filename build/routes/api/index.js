@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const users_1 = __importDefault(require("./users"));
 const roles_1 = __importDefault(require("./roles"));
+const orders_1 = __importDefault(require("./orders"));
 const passport_1 = __importDefault(require("../../internal/passport"));
 const apiPath = '/api';
 const apiRoutes = (router) => {
@@ -12,5 +13,6 @@ const apiRoutes = (router) => {
         .all(passport_1.default.authenticate('jwt'), (req, res, next) => next());
     users_1.default(router, apiPath);
     roles_1.default(router, apiPath);
+    orders_1.default(router, apiPath);
 };
 exports.default = apiRoutes;
