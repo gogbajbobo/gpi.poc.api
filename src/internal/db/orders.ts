@@ -1,13 +1,15 @@
 import db from './'
 
+const ordersTable = 'orders';
+
 class Orders {
 
     static getOrders() {
-        return db('orders').select()
+        return db(ordersTable).select()
     }
 
     static addOrder(ordername: string) {
-        return db('orders').insert({ ordername })
+        return db(ordersTable).insert({ ordername })
     }
 
 }
