@@ -8,12 +8,12 @@ class Orders {
         return db(ordersTable).select()
     }
 
-    static addOrder(ordername: string) {
-        return db(ordersTable).insert({ ordername })
+    static addOrder(user_id: number, ordername: string) {
+        return db(ordersTable).insert({ user_id, ordername })
     }
 
-    static updateOrder(id: number, ordername: string, approved:boolean ) {
-        return db(ordersTable).update({ ordername, approved }).where({ id })
+    static updateOrder(id: number, ordername: string, approved:boolean, user_id: number ) {
+        return db(ordersTable).update({ ordername, approved }).where({ id, user_id })
     }
 
     static deleteOrder(id: number) {
