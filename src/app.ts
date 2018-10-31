@@ -35,6 +35,6 @@ log.info(`host: ${ host } / port: ${ port }`);
 const server = app.listen(port, host, () => {
 
     const { address, port, family } = server.address() as AddressInfo;
-    log.info(`HBUD server listening at http://${ address }:${ port } ${ family }`)
+    log.info(`GPI PoC server listening at http://${ address }:${ port } ${ family }`)
 
 });

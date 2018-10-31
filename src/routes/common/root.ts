@@ -3,7 +3,7 @@ import { Router } from 'express'
 const rootRoute = (router: Router) => {
 
     router.route('/')
-        .get((req, res) => res.json({ info: 'gpi.poc.server' }))
+        .get((req, res) => res.send(`<html><head></head><body>gpi.poc.server</body></html>`))
 
 };
 

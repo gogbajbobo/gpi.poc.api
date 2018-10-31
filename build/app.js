@@ -27,5 +27,5 @@ log.info(`NODE_ENV: ${process.env.NODE_ENV}`);
 log.info(`host: ${host} / port: ${port}`);
 const server = app.listen(port, host, () => {
     const { address, port, family } = server.address();
-    log.info(`HBUD server listening at http://${address}:${port} ${family}`);
+    log.info(`GPI PoC server listening at http://${address}:${port} ${family}`);
 });
